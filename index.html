@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <title>LaunchPad — AWS Practice Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="LaunchPad home">
+        <span class="brand-mark">L</span>
+        <span><strong>LaunchPad</strong><small>Cloud practice hub</small></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">▦</span> Overview</a>
+        <a class="nav-link" href="#checklist"><span class="nav-icon">☑</span> Deployment checklist</a>
+        <a class="nav-link" href="#tasks"><span class="nav-icon">↗</span> Practice tasks</a>
+      </nav>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-icon">☁</div>
+        <strong>Keep learning</strong>
+        <p>Small steps today. Strong cloud skills tomorrow.</p>
+        <div class="mini-progress"><span id="sidebarProgress"></span></div>
+        <small id="sidebarProgressText">0% complete</small>
+      </div>
+
+      <div class="sidebar-bottom">
+        <span class="status-dot"></span>
+        <span>Local demo mode</span>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR CLOUD WORKSPACE</p>
+          <h1>Good work starts with a plan<span class="accent">.</span></h1>
+          <p class="subheading">Track your AWS deployment practice, one task at a time.</p>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme" title="Toggle theme">☼ <span>Theme</span></button>
+      </header>
+
+      <section class="welcome-banner">
+        <div class="welcome-copy">
+          <div class="banner-pill"><span class="live-dot"></span> PRACTICE SESSION</div>
+          <h2>Build. Deploy. Troubleshoot.</h2>
+          <p>A simple dashboard to organize your cloud learning and keep your next deployment on track.</p>
+          <a class="banner-button" href="#checklist">View deployment checklist <span>→</span></a>
+        </div>
+        <div class="banner-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="cloud">☁</div>
+          <div class="server server-one"><i></i><i></i><i></i></div>
+          <div class="server server-two"><i></i><i></i><i></i></div>
+          <div class="spark spark-one">✦</div>
+          <div class="spark spark-two">✧</div>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Task statistics">
+        <article class="stat-card">
+          <div class="stat-top"><span>Total tasks</span><span class="stat-icon violet">▤</span></div>
+          <strong id="totalStat">0</strong>
+          <small>In your practice list</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div>
+          <strong id="completedStat">0</strong>
+          <small>Tasks finished</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Remaining</span><span class="stat-icon orange">◷</span></div>
+          <strong id="remainingStat">0</strong>
+          <small>Ready for your next session</small>
+        </article>
+        <article class="stat-card progress-stat">
+          <div class="stat-top"><span>Overall progress</span><span class="stat-icon blue">↗</span></div>
+          <strong id="progressStat">0%</strong>
+          <div class="progress-track"><span id="mainProgress"></span></div>
+          <small id="progressCaption">Let's get started</small>
+        </article>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel checklist-panel" id="checklist">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">DEPLOYMENT GUIDE</p>
+              <h2>EC2 deployment checklist</h2>
+            </div>
+            <span class="count-badge" id="checklistCount">0 / 6</span>
+          </div>
+          <p class="panel-description">Use this checklist when deploying a static website on an EC2 instance with Nginx.</p>
+          <div class="checklist" id="checklistItems">
+            <label class="check-row"><input type="checkbox" data-check="0"><span class="custom-check"></span><span class="check-text"><strong>Launch an EC2 instance</strong><small>Choose an OS and instance type</small></span><span class="check-tag">AWS</span></label>
+            <label class="check-row"><input type="checkbox" data-check="1"><span class="custom-check"></span><span class="check-text"><strong>Configure the security group</strong><small>Allow SSH (22) and HTTP (80) as needed</small></span><span class="check-tag">Network</span></label>
+            <label class="check-row"><input type="checkbox" data-check="2"><span class="custom-check"></span><span class="check-text"><strong>Connect through SSH</strong><small>Use your private key and correct username</small></span><span class="check-tag">Access</span></label>
+            <label class="check-row"><input type="checkbox" data-check="3"><span class="custom-check"></span><span class="check-text"><strong>Install and start Nginx</strong><small>Check service status after installation</small></span><span class="check-tag">Linux</span></label>
+            <label class="check-row"><input type="checkbox" data-check="4"><span class="custom-check"></span><span class="check-text"><strong>Upload the website files</strong><small>Copy files into the web root</small></span><span class="check-tag">Deploy</span></label>
+            <label class="check-row"><input type="checkbox" data-check="5"><span class="custom-check"></span><span class="check-text"><strong>Test the public webpage</strong><small>Check the IP address and troubleshoot logs</small></span><span class="check-tag">Verify</span></label>
+          </div>
+          <div class="checklist-footer">
+            <span id="checklistMessage">Tick each step as you complete it.</span>
+            <button class="text-button" id="resetChecklist" type="button">Reset checklist</button>
+          </div>
+        </section>
+
+        <section class="panel task-panel" id="tasks">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">YOUR TO-DO LIST</p>
+              <h2>Practice tasks</h2>
+            </div>
+            <span class="task-count" id="taskCount">0 tasks</span>
+          </div>
+
+          <form id="taskForm" class="task-form">
+            <label class="sr-only" for="taskInput">New practice task</label>
+            <input id="taskInput" type="text" maxlength="90" placeholder="Add a practice task..." autocomplete="off" required>
+            <button type="submit" aria-label="Add task">+</button>
+          </form>
+
+          <div class="task-toolbar">
+            <div class="filter-tabs" role="group" aria-label="Filter tasks">
+              <button type="button" class="filter-btn active" data-filter="all">All</button>
+              <button type="button" class="filter-btn" data-filter="active">Active</button>
+              <button type="button" class="filter-btn" data-filter="completed">Done</button>
+            </div>
+            <button class="text-button" id="clearCompleted" type="button">Clear done</button>
+          </div>
+
+          <ul class="task-list" id="taskList" aria-live="polite"></ul>
+          <div class="empty-state" id="emptyState">
+            <span class="empty-icon">✦</span>
+            <strong>You're all caught up</strong>
+            <p>Add a task above to plan your next practice session.</p>
+          </div>
+          <div class="task-footer"><span id="taskFooterText">Saved in this browser</span><span class="local-badge"><i></i> Auto-save on</span></div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <span>LaunchPad <span class="footer-dot">•</span> AWS learning project</span>
+        <span>Static website · No backend required</span>
+      </footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
